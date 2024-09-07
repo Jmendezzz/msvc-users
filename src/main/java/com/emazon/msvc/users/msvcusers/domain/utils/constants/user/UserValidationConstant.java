@@ -1,4 +1,4 @@
-package com.emazon.msvc.users.msvcusers.domain.utils.constants;
+package com.emazon.msvc.users.msvcusers.domain.utils.constants.user;
 
 public class UserValidationConstant {
   public static final String EMAIL_VALIDATION_REGEX = "^[a-zA-Z\\d._%+-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,6}$";

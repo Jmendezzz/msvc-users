@@ -1,8 +1,8 @@
 package com.emazon.msvc.users.msvcusers.domain.exceptions.user;
 
 import com.emazon.msvc.users.msvcusers.domain.exceptions.BusinessException;
-import com.emazon.msvc.users.msvcusers.domain.utils.constants.UserExceptionCode;
-import com.emazon.msvc.users.msvcusers.domain.utils.constants.UserExceptionMessage;
+import com.emazon.msvc.users.msvcusers.domain.utils.constants.user.UserExceptionCode;
+import com.emazon.msvc.users.msvcusers.domain.utils.constants.user.UserExceptionMessage;
 
 public class EmailAlreadyExistsException extends BusinessException {
   public EmailAlreadyExistsException() {
