@@ -137,8 +137,8 @@ class UserTest {
   // Testing valid password
   @Test
   void testSetValidPassword() {
-    user.setPassword("StrongPass123_");
-    assertEquals("StrongPass123_", user.getPassword());
+    user.setPassword("P@ssw0rd123!");
+    assertEquals("P@ssw0rd123!", user.getPassword());
   }
   @ParameterizedTest
   @ValueSource(strings = {"weakpassword", "Pass1_", "Pass1234", "PASSWORD123_", "Password_"})

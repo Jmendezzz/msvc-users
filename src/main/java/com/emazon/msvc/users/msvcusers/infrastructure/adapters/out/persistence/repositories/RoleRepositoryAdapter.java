@@ -14,6 +14,12 @@ import java.util.Optional;
 public class RoleRepositoryAdapter implements RoleRepository {
   private final RoleJpaRepository jpaRepository;
   private final RoleEntityMapper mapper;
+
+  @Override
+  public void saveRole(Role role) {
+    jpaRepository.save(mapper.toEntity(role));
+  }
+
   @Override
   public Optional<Role> findRoleByName(String roleName) {
     return jpaRepository.findByName(roleName).map(mapper::toDomain);

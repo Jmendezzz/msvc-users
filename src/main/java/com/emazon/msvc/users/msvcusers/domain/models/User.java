@@ -99,7 +99,6 @@ public class User {
     }
     this.password = password;
   }
-
   public void setRole(Role role) {
     if(InputValidation.isNull(role)){
       throw new InvalidInputException(USER_ROLE_NULL, USER_ROLE_NULL_CODE);

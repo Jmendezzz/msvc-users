@@ -15,6 +15,7 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, St
 
   @Override
   public boolean isValid(String phoneNumber, ConstraintValidatorContext context) {
+    if(phoneNumber == null || phoneNumber.isEmpty()) return true;
     return phoneNumber.startsWith(prefix) && phoneNumber.length()  <= UserValidationConstant.PHONE_NUMBER_MAX_LENGTH;
   }
 
