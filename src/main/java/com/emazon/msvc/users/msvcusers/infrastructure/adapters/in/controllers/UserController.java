@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class UserController {
   private final UserHandler userHandler;
 
   @PostMapping("/create/warehouse-assistant")
+  @PreAuthorize("hasRole(@adminRole)")
   public ResponseEntity<UserResponseDto> createWarehouseAssistant(@Valid @RequestBody CreateUserDtoRequest userDto){
     return new ResponseEntity<>(userHandler.createWarehouseAssistant(userDto), HttpStatus.CREATED);
   }

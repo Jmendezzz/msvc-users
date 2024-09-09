@@ -99,6 +99,9 @@ public class User {
     }
     this.password = password;
   }
+  public void setEmptyPassword() {
+    this.password = null;
+  }
   public void setRole(Role role) {
     if(InputValidation.isNull(role)){
       throw new InvalidInputException(USER_ROLE_NULL, USER_ROLE_NULL_CODE);

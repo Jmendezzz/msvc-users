@@ -6,9 +6,9 @@ spring:
     name: msvc-users
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DB_MSVC_USER_URL}
+    username: ${DB_MSVC_USER_USERNAME}
+    password: ${DB_MSVC_USER_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -30,3 +30,14 @@ security:
   jwt:
     key: ${JWT_KEY}
     issuer: ${JWT_ISSUER}
+
+users:
+  admin:
+    firstName: ${ADMIN_FIRSTNAME}
+    lastName: ${ADMIN_LASTNAME}
+    identityNumber: ${ADMIN_IDENTITY_NUMBER}
+    phoneNumber: ${ADMIN_PHONE_NUMBER}
+    birthDate: ${ADMIN_BIRTH_DATE}
+    email: ${ADMIN_EMAIL}
+    password: ${ADMIN_PASSWORD}
+

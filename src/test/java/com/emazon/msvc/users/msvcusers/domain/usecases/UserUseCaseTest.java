@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CreateUserUseCaseTest {
+class UserUseCaseTest {
   @Mock
   private RoleUseCase roleUseCase;
   @Mock

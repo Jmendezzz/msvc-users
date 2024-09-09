@@ -2,6 +2,7 @@ package com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.security.filt
 
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.TokenService;
 import com.emazon.msvc.users.msvcusers.infrastructure.utils.constants.JwtTokenConstant;
+import com.emazon.msvc.users.msvcusers.infrastructure.utils.constants.SecurityConstant;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +37,14 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
       String username = tokenService.getUsernameFromToken(token);
       String role = tokenService.getRoleFromToken(token);
 
-      Authentication authentication = new UsernamePasswordAuthenticationToken(username,null, Set.of(() -> role));
+      String prefixedRole = SecurityConstant.ROLE_PREFIX + role;
+
+      Authentication authentication = new UsernamePasswordAuthenticationToken(
+              username,
+              null,
+              Set.of(() -> prefixedRole)
+      );
+
       SecurityContext context = SecurityContextHolder.getContext();
       context.setAuthentication(authentication);
     }

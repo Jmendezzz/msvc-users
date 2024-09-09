@@ -6,10 +6,12 @@ import com.emazon.msvc.users.msvcusers.domain.ports.out.repositories.RoleReposit
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import static com.emazon.msvc.users.msvcusers.domain.utils.constants.role.RoleConstant.*;
 
 @Configuration
+@Order(1)
 public class RoleInitializer {
   @Bean
   public CommandLineRunner initializeRoles(RoleRepository roleRepository){

@@ -1,4 +1,4 @@
-package com.emazon.msvc.users.msvcusers.application.infrastructure.controllers;
+package com.emazon.msvc.users.msvcusers.infrastructure.controllers;
 
 import com.emazon.msvc.users.msvcusers.application.handlers.UserHandler;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.controllers.UserController;
@@ -21,8 +21,6 @@ class UserControllerTest {
 
   @MockBean
   private UserHandler userHandler;
-
-  @Test
 
   void testCreateWarehouseAssistantSuccess() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/users/create/warehouse-assistant")
