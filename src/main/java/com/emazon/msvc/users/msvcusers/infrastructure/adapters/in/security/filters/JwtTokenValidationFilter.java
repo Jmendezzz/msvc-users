@@ -2,28 +2,29 @@ package com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.security.filt
 
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.TokenService;
 import com.emazon.msvc.users.msvcusers.infrastructure.utils.constants.JwtTokenConstant;
-import com.emazon.msvc.users.msvcusers.infrastructure.utils.constants.SecurityConstant;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.apache.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Set;
 
+@Component
+@AllArgsConstructor
 public class JwtTokenValidationFilter extends OncePerRequestFilter {
   private final TokenService tokenService;
-
-  public JwtTokenValidationFilter(TokenService tokenService) {
-    this.tokenService = tokenService;
-  }
-
+  private final UserDetailsService userDetailsService;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -35,14 +36,13 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
       if (!tokenService.validateToken(token))  return;
 
       String username = tokenService.getUsernameFromToken(token);
-      String role = tokenService.getRoleFromToken(token);
 
-      String prefixedRole = SecurityConstant.ROLE_PREFIX + role;
+      UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-      Authentication authentication = new UsernamePasswordAuthenticationToken(
-              username,
+      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+              userDetails,
               null,
-              Set.of(() -> prefixedRole)
+              userDetails.getAuthorities()
       );
 
       SecurityContext context = SecurityContextHolder.getContext();

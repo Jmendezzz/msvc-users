@@ -24,7 +24,8 @@ public class UserUseCaseImp implements UserUseCase {
 
   @Override
   public User createWarehouseAssistant(User user) {
-    Role warehouseAssistantRole = roleUseCase.getRoleByName(RoleConstant.ROLE_WAREHOUSE_ASSISTANT)
+    Role warehouseAssistantRole = roleUseCase
+            .getRoleByName(RoleConstant.ROLE_WAREHOUSE_ASSISTANT)
             .orElseThrow(RoleNotFoundException::new);
 
     user.setRole(warehouseAssistantRole);

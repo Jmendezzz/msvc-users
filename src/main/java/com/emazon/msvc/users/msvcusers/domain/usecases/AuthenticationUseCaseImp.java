@@ -22,9 +22,8 @@ public class AuthenticationUseCaseImp implements AuthenticationUseCase {
   @Override
   public Authentication login(String email, String password) {
     Optional<User> user = userRepository.findUserByEmail(email);
-    if(user.isEmpty()) throw new InvalidCredentialsException();
 
-    if(!passwordEncoder.matches(password, user.get().getPassword())) throw new InvalidCredentialsException();
+    if (user.isEmpty() || !passwordEncoder.matches(password, user.get().getPassword())) throw new InvalidCredentialsException();
 
     User authenticatedUser = user.get();
     authenticatedUser.setEmptyPassword();

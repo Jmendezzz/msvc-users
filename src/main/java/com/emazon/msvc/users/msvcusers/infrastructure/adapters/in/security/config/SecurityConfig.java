@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
-  private final TokenService tokenService;
+  private final JwtTokenValidationFilter jwtTokenValidationFilter;
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
@@ -37,7 +37,7 @@ public class SecurityConfig {
               exceptionHandling.authenticationEntryPoint(new JwtAuthenticationEntryPoint());
               exceptionHandling.accessDeniedHandler(new CustomAccessDeniedHandler());
             })
-            .addFilterBefore(new JwtTokenValidationFilter(tokenService), BasicAuthenticationFilter.class)
+            .addFilterBefore(jwtTokenValidationFilter, BasicAuthenticationFilter.class)
             .build();
   }
 

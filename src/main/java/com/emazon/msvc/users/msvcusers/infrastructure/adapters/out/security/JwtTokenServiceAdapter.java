@@ -54,8 +54,4 @@ public class JwtTokenServiceAdapter implements TokenService {
     return JWT.decode(token).getSubject();
   }
 
-  @Override
-  public String getRoleFromToken(String token) {
-    return JWT.decode(token).getClaim(JwtTokenConstant.USER_ROLE_CLAIM).asString();
-  }
 }
