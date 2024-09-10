@@ -1,4 +1,4 @@
-package com.emazon.msvc.users.msvcusers.domain.utils.constants;
+package com.emazon.msvc.users.msvcusers.domain.utils.constants.user;
 
 public class UserExceptionMessage {
   public static final String USER_FIRST_NAME_NULL_OR_EMPTY = "User first name cannot be null or empty";
