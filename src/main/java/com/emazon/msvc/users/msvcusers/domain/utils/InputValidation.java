@@ -1,6 +1,6 @@
 package com.emazon.msvc.users.msvcusers.domain.utils;
 
-import static com.emazon.msvc.users.msvcusers.domain.utils.constants.UserValidationConstant.*;
+import static com.emazon.msvc.users.msvcusers.domain.utils.constants.user.UserValidationConstant.*;
 
 public class InputValidation {
   public static boolean isNullOrEmpty(String input) {

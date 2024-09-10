@@ -6,9 +6,9 @@ import com.emazon.msvc.users.msvcusers.domain.utils.InputValidation;
 import java.time.LocalDate;
 import java.time.Period;
 
-import static com.emazon.msvc.users.msvcusers.domain.utils.constants.UserExceptionCode.*;
-import static com.emazon.msvc.users.msvcusers.domain.utils.constants.UserExceptionMessage.*;
-import static com.emazon.msvc.users.msvcusers.domain.utils.constants.UserValidationConstant.MIN_AGE;
+import static com.emazon.msvc.users.msvcusers.domain.utils.constants.user.UserExceptionCode.*;
+import static com.emazon.msvc.users.msvcusers.domain.utils.constants.user.UserExceptionMessage.*;
+import static com.emazon.msvc.users.msvcusers.domain.utils.constants.user.UserValidationConstant.MIN_AGE;
 
 public class User {
   private Long id;
@@ -99,7 +99,9 @@ public class User {
     }
     this.password = password;
   }
-
+  public void setEmptyPassword() {
+    this.password = null;
+  }
   public void setRole(Role role) {
     if(InputValidation.isNull(role)){
       throw new InvalidInputException(USER_ROLE_NULL, USER_ROLE_NULL_CODE);

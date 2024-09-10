@@ -1,4 +1,4 @@
-package com.emazon.msvc.users.msvcusers.domain.utils.constants;
+package com.emazon.msvc.users.msvcusers.domain.utils.constants.user;
 
 public class UserExceptionCode {
   public static final String USER_FIRST_NAME_NULL_OR_EMPTY_CODE = "USER_FIRST_NAME_NULL_OR_EMPTY";
