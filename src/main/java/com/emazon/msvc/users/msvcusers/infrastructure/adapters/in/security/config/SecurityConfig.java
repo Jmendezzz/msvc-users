@@ -1,6 +1,5 @@
 package com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.security.config;
 
-import com.emazon.msvc.users.msvcusers.domain.ports.out.security.TokenService;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.security.filters.CustomAccessDeniedHandler;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.security.filters.JwtAuthenticationEntryPoint;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.in.security.filters.JwtTokenValidationFilter;
