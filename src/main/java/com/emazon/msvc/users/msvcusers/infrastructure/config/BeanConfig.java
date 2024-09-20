@@ -35,7 +35,7 @@ public class BeanConfig {
 
   @Bean
   public AuthenticationUseCase authenticationUseCase(){
-    return new AuthenticationUseCaseImp(userRepository,passwordEncoder,tokenService);
+    return new AuthenticationUseCaseImp(userUseCase(), userRepository,passwordEncoder,tokenService);
   }
 
 }

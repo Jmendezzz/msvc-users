@@ -4,6 +4,7 @@ import com.emazon.msvc.users.msvcusers.domain.exceptions.authentication.InvalidC
 import com.emazon.msvc.users.msvcusers.domain.models.Authentication;
 import com.emazon.msvc.users.msvcusers.domain.models.User;
 import com.emazon.msvc.users.msvcusers.domain.ports.in.usecases.AuthenticationUseCase;
+import com.emazon.msvc.users.msvcusers.domain.ports.in.usecases.UserUseCase;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.repositories.UserRepository;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.PasswordEncoder;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.TokenService;
@@ -11,10 +12,12 @@ import com.emazon.msvc.users.msvcusers.domain.ports.out.security.TokenService;
 import java.util.Optional;
 
 public class AuthenticationUseCaseImp implements AuthenticationUseCase {
+  private final UserUseCase userUseCase;
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final TokenService tokenService;
-  public AuthenticationUseCaseImp(UserRepository userRepository, PasswordEncoder passwordEncoder, TokenService tokenService) {
+  public AuthenticationUseCaseImp(UserUseCase userUseCase, UserRepository userRepository, PasswordEncoder passwordEncoder, TokenService tokenService) {
+    this.userUseCase = userUseCase;
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.tokenService = tokenService;
@@ -29,7 +32,15 @@ public class AuthenticationUseCaseImp implements AuthenticationUseCase {
     authenticatedUser.setEmptyPassword();
 
     String token = tokenService.generateToken(authenticatedUser.getEmail(), authenticatedUser.getId(),authenticatedUser.getRole());
-
     return new Authentication(authenticatedUser, token);
+  }
+
+  @Override
+  public Authentication signUp(User user) {
+    User userCreated = userUseCase.createCustomer(user);
+    userCreated.setEmptyPassword();
+
+    String token = tokenService.generateToken(userCreated.getEmail(), userCreated.getId(),userCreated.getRole());
+    return new Authentication(userCreated, token);
   }
 }

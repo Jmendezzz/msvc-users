@@ -4,6 +4,7 @@ import com.emazon.msvc.users.msvcusers.domain.exceptions.authentication.InvalidC
 import com.emazon.msvc.users.msvcusers.domain.models.Authentication;
 import com.emazon.msvc.users.msvcusers.domain.models.Role;
 import com.emazon.msvc.users.msvcusers.domain.models.User;
+import com.emazon.msvc.users.msvcusers.domain.ports.in.usecases.UserUseCase;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.repositories.UserRepository;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.PasswordEncoder;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.TokenService;
@@ -27,6 +28,8 @@ class AuthenticationUseCaseTest {
 
   @Mock
   private PasswordEncoder passwordEncoder;
+  @Mock
+  private UserUseCase userUseCase;
 
   @Mock
   private TokenService tokenService;
@@ -34,7 +37,7 @@ class AuthenticationUseCaseTest {
 
  @BeforeEach
   void setUp() {
-    authenticationUseCaseImp = new AuthenticationUseCaseImp(userRepository, passwordEncoder, tokenService);
+    authenticationUseCaseImp = new AuthenticationUseCaseImp(userUseCase, userRepository, passwordEncoder, tokenService);
   }
 
   @Test

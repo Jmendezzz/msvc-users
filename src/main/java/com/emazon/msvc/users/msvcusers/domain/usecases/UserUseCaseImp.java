@@ -24,12 +24,20 @@ public class UserUseCaseImp implements UserUseCase {
 
   @Override
   public User createWarehouseAssistant(User user) {
-    Role warehouseAssistantRole = roleUseCase
-            .getRoleByName(RoleConstant.ROLE_WAREHOUSE_ASSISTANT)
+    return createUserWithRole(user, RoleConstant.ROLE_WAREHOUSE_ASSISTANT);
+  }
+
+  @Override
+  public User createCustomer(User user) {
+    return createUserWithRole(user, RoleConstant.ROLE_CUSTOMER);
+  }
+
+  private User createUserWithRole(User user, String roleName) {
+    Role role = roleUseCase
+            .getRoleByName(roleName)
             .orElseThrow(RoleNotFoundException::new);
 
-    user.setRole(warehouseAssistantRole);
-
+    user.setRole(role);
     return createUser(user);
   }
 
