@@ -4,6 +4,7 @@ public class UserExceptionMessage {
   public static final String USER_FIRST_NAME_NULL_OR_EMPTY = "User first name cannot be null or empty";
   public static final String USER_LAST_NAME_NULL_OR_EMPTY = "User last name cannot be null or empty";
   public static final String USER_IDENTITY_NUMBER_NULL_OR_EMPTY = "User identity number cannot be null or empty";
+  public static final String USER_IDENTITY_NUMBER_INVALID_FORMAT = "User identity number is invalid";
   public static final String USER_PHONE_NUMBER_NULL_OR_EMPTY = "User phone number cannot be null or empty";
   public static final String USER_PHONE_NUMBER_INVALID = "User phone number is invalid";
   public static final String USER_BIRTH_DATE_NULL = "User birth date cannot be null";

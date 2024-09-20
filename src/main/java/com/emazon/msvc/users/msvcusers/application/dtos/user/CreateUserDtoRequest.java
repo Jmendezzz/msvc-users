@@ -7,6 +7,7 @@ import com.emazon.msvc.users.msvcusers.infrastructure.validations.annotations.Ph
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 
@@ -19,6 +20,7 @@ public record CreateUserDtoRequest(
     @NotBlank(message = USER_LAST_NAME_NULL_OR_EMPTY)
     String lastName,
     @NotBlank(message = USER_IDENTITY_NUMBER_NULL_OR_EMPTY)
+    @Pattern(regexp = UserValidationConstant.IDENTIFICATION_NUMBER_VALIDATION_REGEX, message = USER_IDENTITY_NUMBER_INVALID_FORMAT)
     String identityNumber,
     @NotBlank(message = USER_PHONE_NUMBER_NULL_OR_EMPTY)
     @PhoneNumber
