@@ -33,20 +33,21 @@ public class JwtTokenValidationFilter extends OncePerRequestFilter {
     if (token != null && token.startsWith(JwtTokenConstant.TOKEN_PREFIX)) {
       token = token.substring(7);
 
-      if (!tokenService.validateToken(token))  return;
+      if (tokenService.validateToken(token)) {
 
-      String username = tokenService.getUsernameFromToken(token);
+        String username = tokenService.getUsernameFromToken(token);
 
-      UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-              userDetails,
-              null,
-              userDetails.getAuthorities()
-      );
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                null,
+                userDetails.getAuthorities()
+        );
 
-      SecurityContext context = SecurityContextHolder.getContext();
-      context.setAuthentication(authentication);
+        SecurityContext context = SecurityContextHolder.getContext();
+        context.setAuthentication(authentication);
+      }
     }
 
     filterChain.doFilter(request, response);
