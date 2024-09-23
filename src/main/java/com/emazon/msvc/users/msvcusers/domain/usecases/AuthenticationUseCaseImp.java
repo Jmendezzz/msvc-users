@@ -1,6 +1,8 @@
 package com.emazon.msvc.users.msvcusers.domain.usecases;
 
 import com.emazon.msvc.users.msvcusers.domain.exceptions.authentication.InvalidCredentialsException;
+import com.emazon.msvc.users.msvcusers.domain.exceptions.authentication.InvalidTokenException;
+import com.emazon.msvc.users.msvcusers.domain.exceptions.user.UserNotFoundException;
 import com.emazon.msvc.users.msvcusers.domain.models.Authentication;
 import com.emazon.msvc.users.msvcusers.domain.models.User;
 import com.emazon.msvc.users.msvcusers.domain.ports.in.usecases.AuthenticationUseCase;
@@ -42,5 +44,19 @@ public class AuthenticationUseCaseImp implements AuthenticationUseCase {
 
     String token = tokenService.generateToken(userCreated.getEmail(), userCreated.getId(),userCreated.getRole());
     return new Authentication(userCreated, token);
+  }
+
+  @Override
+  public User getUserDetails(String token) {
+    if(!tokenService.validateToken(token)) throw new InvalidTokenException();
+    String email = tokenService.getUsernameFromToken(token);
+    Optional<User> user = userRepository.findUserByEmail(email);
+
+    if(user.isEmpty()) throw new UserNotFoundException();
+
+    User userDetails = user.get();
+    userDetails.setEmptyPassword();
+
+    return userDetails;
   }
 }

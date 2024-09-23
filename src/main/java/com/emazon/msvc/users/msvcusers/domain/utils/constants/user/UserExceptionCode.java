@@ -16,6 +16,7 @@ public class UserExceptionCode {
   public static final String USER_EMAIL_ALREADY_EXISTS_CODE = "USER_EMAIL_ALREADY_EXISTS";
   public static final String USER_IDENTITY_NUMBER_ALREADY_EXISTS_CODE = "USER_IDENTITY_NUMBER_ALREADY_EXISTS";
   public static final String USER_PHONE_NUMBER_ALREADY_EXISTS_CODE = "USER_PHONE_NUMBER_ALREADY_EXISTS";
+  public static final String USER_NOT_FOUND_CODE = "USER_NOT_FOUND";
   private UserExceptionCode() {
   }
 }

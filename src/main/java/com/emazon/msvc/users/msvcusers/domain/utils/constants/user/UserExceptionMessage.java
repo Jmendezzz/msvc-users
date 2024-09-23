@@ -17,6 +17,7 @@ public class UserExceptionMessage {
   public static final String USER_EMAIL_ALREADY_EXISTS = "The email has already been registered";
   public static final String USER_IDENTITY_NUMBER_ALREADY_EXISTS = "The identity number has already been registered";
   public static final String USER_PHONE_NUMBER_ALREADY_EXISTS = "The phone number has already been registered";
+  public static final String USER_NOT_FOUND = "User not found";
   private UserExceptionMessage() {
   }
 }
