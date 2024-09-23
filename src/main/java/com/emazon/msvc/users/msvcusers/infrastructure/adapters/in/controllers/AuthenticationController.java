@@ -11,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.emazon.msvc.users.msvcusers.infrastructure.utils.constants.SecurityConstant.BEARER_TOKEN_INDEX;
+
 @RestController
 @RequestMapping("api/v1/auth")
 @AllArgsConstructor
@@ -28,7 +30,7 @@ public class AuthenticationController {
 
   @GetMapping("/validate-token")
   public ResponseEntity<UserDetailsResponseDto> validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
-    String tokenValue = token.substring(7);
+    String tokenValue = token.substring(BEARER_TOKEN_INDEX);
     return ResponseEntity.ok(authenticationHandler.getUserDetails(tokenValue));
   }
 }
