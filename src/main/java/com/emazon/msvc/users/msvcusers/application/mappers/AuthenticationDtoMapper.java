@@ -2,6 +2,7 @@ package com.emazon.msvc.users.msvcusers.application.mappers;
 
 import com.emazon.msvc.users.msvcusers.application.dtos.authentication.AuthenticationResponseDto;
 import com.emazon.msvc.users.msvcusers.application.dtos.authentication.SignUpRequestDto;
+import com.emazon.msvc.users.msvcusers.application.dtos.authentication.UserDetailsResponseDto;
 import com.emazon.msvc.users.msvcusers.domain.models.Authentication;
 import com.emazon.msvc.users.msvcusers.domain.models.User;
 import org.mapstruct.Mapper;
@@ -15,4 +16,6 @@ public interface AuthenticationDtoMapper {
   @Mapping(source = "user.role.name", target = "role")
   AuthenticationResponseDto toDto(Authentication authentication);
   User toDomain(SignUpRequestDto signUpRequestDto);
+  @Mapping(source= "user.role.name", target = "role")
+  UserDetailsResponseDto toDto(User user);
 }
