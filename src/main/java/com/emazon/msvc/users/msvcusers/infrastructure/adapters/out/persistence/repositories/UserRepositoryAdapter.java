@@ -1,11 +1,16 @@
 package com.emazon.msvc.users.msvcusers.infrastructure.adapters.out.persistence.repositories;
 
+import com.emazon.msvc.users.msvcusers.domain.models.Paginated;
+import com.emazon.msvc.users.msvcusers.domain.models.Pagination;
+import com.emazon.msvc.users.msvcusers.domain.models.Role;
 import com.emazon.msvc.users.msvcusers.domain.models.User;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.repositories.UserRepository;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.out.persistence.entities.UserEntity;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.out.persistence.mappers.UserEntityMapper;
 import com.emazon.msvc.users.msvcusers.infrastructure.adapters.out.persistence.repositories.jpa.UserJpaRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -41,5 +46,11 @@ public class UserRepositoryAdapter implements UserRepository {
   @Override
   public Optional<User> findUserByPhoneNumber(String phoneNumber) {
     return repository.findByPhoneNumber(phoneNumber).map(mapper::toDomain);
+  }
+
+  @Override
+  public Paginated<User> findAllUsersByRole(String roleName, Pagination pagination) {
+    Pageable pageable = PageRequest.of(pagination.getPage(), pagination.getSize());
+    return mapper.toDomainPaginated(repository.findAllByRoleName(roleName, pageable));
   }
 }
