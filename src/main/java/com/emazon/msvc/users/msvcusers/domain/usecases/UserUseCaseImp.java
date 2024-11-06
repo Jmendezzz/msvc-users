@@ -4,6 +4,8 @@ import com.emazon.msvc.users.msvcusers.domain.exceptions.role.RoleNotFoundExcept
 import com.emazon.msvc.users.msvcusers.domain.exceptions.user.EmailAlreadyExistsException;
 import com.emazon.msvc.users.msvcusers.domain.exceptions.user.IdentityNumberAlreadyExistsException;
 import com.emazon.msvc.users.msvcusers.domain.exceptions.user.PhoneNumberAlreadyExistsException;
+import com.emazon.msvc.users.msvcusers.domain.models.Paginated;
+import com.emazon.msvc.users.msvcusers.domain.models.Pagination;
 import com.emazon.msvc.users.msvcusers.domain.models.Role;
 import com.emazon.msvc.users.msvcusers.domain.models.User;
 import com.emazon.msvc.users.msvcusers.domain.ports.in.usecases.RoleUseCase;
@@ -11,6 +13,8 @@ import com.emazon.msvc.users.msvcusers.domain.ports.in.usecases.UserUseCase;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.repositories.UserRepository;
 import com.emazon.msvc.users.msvcusers.domain.ports.out.security.PasswordEncoder;
 import com.emazon.msvc.users.msvcusers.domain.utils.constants.role.RoleConstant;
+
+import static com.emazon.msvc.users.msvcusers.domain.utils.constants.role.RoleConstant.ROLE_WAREHOUSE_ASSISTANT;
 
 public class UserUseCaseImp implements UserUseCase {
   private final RoleUseCase roleUseCase;
@@ -24,12 +28,17 @@ public class UserUseCaseImp implements UserUseCase {
 
   @Override
   public User createWarehouseAssistant(User user) {
-    return createUserWithRole(user, RoleConstant.ROLE_WAREHOUSE_ASSISTANT);
+    return createUserWithRole(user, ROLE_WAREHOUSE_ASSISTANT);
   }
 
   @Override
   public User createCustomer(User user) {
     return createUserWithRole(user, RoleConstant.ROLE_CUSTOMER);
+  }
+
+  @Override
+  public Paginated<User> getWarehouseAssistants(Pagination pagination) {
+    return userRepository.findAllUsersByRole(ROLE_WAREHOUSE_ASSISTANT, pagination);
   }
 
   private User createUserWithRole(User user, String roleName) {
